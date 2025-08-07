@@ -1,0 +1,26 @@
+
+# GitLab Local Instance - Password Reset Issue
+
+Este repositório documenta um problema comum ao configurar uma instância local do GitLab: a senha gerada automaticamente expira após 24 horas, tornando-a inacessível. Aqui você encontrará a explicação do problema e a solução utilizando acesso root à instância.
+
+## Problema
+
+Ao configurar uma instância local do GitLab, uma senha temporária é gerada para o usuário `root`. No entanto, essa senha expira após 24 horas e o arquivo que a contém (`initial_root_password`) pode não estar mais disponível.
+
+## Solução
+
+Se você tem acesso root à instância, pode facilmente redefinir a senha com o seguinte comando:
+
+```bash
+sudo gitlab-rake "gitlab:password:reset"
+
+Documentação Oficial
+Para mais detalhes, consulte a documentação oficial do GitLab sobre segurança e senhas.
+
+### 🔧 Script `scripts/reset-password.sh`
+
+```bash
+#!/bin/bash
+
+echo "Redefinindo senha do usuário root no GitLab..."
+sudo gitlab-rake "gitlab:password:reset"
